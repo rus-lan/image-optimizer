@@ -65,8 +65,14 @@
     "psr/container": {
         "version": "1.0.0"
     },
+    "psr/log": {
+        "version": "1.1.0"
+    },
     "psr/simple-cache": {
         "version": "1.0.1"
+    },
+    "spatie/image-optimizer": {
+        "version": "1.1.4"
     },
     "symfony/cache": {
         "version": "v4.2.7"
@@ -194,6 +200,9 @@
     },
     "symfony/polyfill-php72": {
         "version": "v1.11.0"
+    },
+    "symfony/process": {
+        "version": "v4.2.7"
     },
     "symfony/profiler-pack": {
         "version": "v1.0.4"

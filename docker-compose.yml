@@ -1,0 +1,38 @@
+version: '3.7'
+services:
+    composer:
+        image: composer:latest
+        working_dir: ${APP_PATH_CONTAINER}
+        user: "${APP_USER_NAME}:${APP_USER_NAME}"
+        volumes:
+            - "${APP_PATH_HOST}:${APP_PATH_CONTAINER}"
+        entrypoint:
+            - composer
+            - install
+            - --prefer-source
+            - --no-interaction
+        links:
+            - php
+            - nginx
+        depends_on:
+            - php
+            - nginx
+    nginx:
+        image: nginx:latest
+        ports:
+            - "${APP_PORT_HOST}:80"
+        volumes:
+            - "${APP_PATH_HOST_NGINX}:${APP_PATH_CONTAINER_NGINX}"
+            - "${APP_PATH_HOST}:${APP_PATH_CONTAINER}"
+            - "${APP_PATH_HOST_LOG}:${APP_PATH_CONTAINER_LOG}"
+        links:
+            - php
+        depends_on:
+            - php
+    php:
+        build: ${APP_PATH_HOST_PHP}
+        user: "${APP_USER_NAME}:${APP_USER_NAME}"
+        working_dir: ${APP_PATH_CONTAINER}
+        volumes:
+            - "${APP_PATH_HOST}:${APP_PATH_CONTAINER}"
+            - "${APP_PATH_HOST_LOG}:${APP_PATH_CONTAINER_LOG}"
